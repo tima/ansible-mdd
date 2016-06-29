@@ -7,6 +7,7 @@ venv/
 scratch/
 .bundle/
 *BAK
+*.pyc
 
 *ansible.cfg
 *extra_vars.yml
