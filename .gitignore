@@ -1,0 +1,12 @@
+*#
+*~
+venv/
+.vagrant/
+*deb
+*rpm
+scratch/
+.bundle/
+
+*ansible.cfg
+*extra_vars.yml
+*hosts

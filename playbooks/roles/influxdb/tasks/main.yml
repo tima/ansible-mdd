@@ -1,0 +1,23 @@
+---
+- include: install.yml
+  tags: 
+    - install
+
+# these next two steps are like influxdb_facts used to inform the config templates
+- block:
+  - name: Capture InfluxDB version information
+    command: influxd version
+    register: influxdb_runtime_version_raw
+    changed_when: False
+  - name: Store InfluxDB version, branch, and commit
+    set_fact:
+      influxdb_runtime_version: "{{ influxdb_runtime_version_raw.stdout.split()[1] }}"
+      influxdb_runtime_branch: "{{ influxdb_runtime_version_raw.stdout.split()[3] }}"
+      influxdb_runtime_commit: "{{ influxdb_runtime_version_raw.stdout.split()[4] }}"
+  tags:
+    - always
+
+- include: configure.yml
+  tags:
+    - configure
+

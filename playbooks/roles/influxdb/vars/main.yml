@@ -1,0 +1,38 @@
+---
+influxdb_repo_baseurl: "https://repos.influxdata.com/{{ ansible_distribution | lower }}"
+influxdb_yum_baseurl: "{{ influxdb_repo_baseurl }}/$releasever/$basearch/{{ influxdb_install_version }}"
+influxdb_apt_sourcing: >
+  deb {{ influxdb_repo_baseurl }} {{ ansible_distribution_release }} {{ influxdb_install_version }}
+
+# By default, the InfluxData package repository will be used for installation. Alternatively,
+# if you have a specific package/version you want to install from, you can specify a package
+# URL here. Note that this does not modify any other logic, so installing older versions may
+# lead to unexpected results. Use at your own risk.
+influxdb_install_url: null
+
+# Whether or not to purge peer data on each run (useful for cluster testing). NOTE: This will
+# cause catastrophic data loss on an active cluster/instance, so use caution.
+influxdb_purge_peer_data: no
+
+# If yes, service will be started. Will not be started if set to no.
+influxdb_start_service: yes
+
+# If yes, will overwrite the packaged configuration with an Ansible/Jinja2 template
+influxdb_template_configuration: yes
+
+
+# If yes, will run a templatized stress test against a target instance
+#influxdb_run_stress: no
+# Destination for influx_stress metrics (ie http://localhost:8086)
+#influxdb_stress_metric_endpoint: 
+# Destination database for influx_stress metrics
+#influxdb_stress_metric_database:
+# Tag string to pass to influx_stress (ie tag1=orange,tag2=banana)
+#influxdb_stress_metric_tags: 
+
+# If supplied, will check for presence of database, and error if not found (useful for upgrade
+# testing).
+#influxdb_verify_database_is_present:
+
+# Path for finding InfluxDB binaries. Added for backwards-compatibility with < 0.9.5
+influxdb_binary_path: /usr/bin

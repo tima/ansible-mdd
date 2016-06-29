@@ -1,0 +1,46 @@
+---
+- name: get datasources
+  uri:
+    HEADER_Content-Type: application/json
+    url: http://localhost:3000/api/datasources
+    method: GET
+    user: admin
+    password: "{{ grafana_admin_password }}"
+    force_basic_auth: yes
+  tags: datasource
+  register: datasources
+  when: grafana_data_source is defined
+
+- name: set datasource fact
+  set_fact:
+    grafana_datasources: "{{ datasources.json | default([]) | map(attribute='name') | list }}"
+  tags: datasource
+
+- name: Setup test datasource
+  uri:
+    HEADER_Content-Type: application/json
+    url: http://localhost:3000/api/datasources
+    method: POST
+    user: admin
+    password: "{{ grafana_admin_password }}"
+    body: "{{ grafana_data_source | to_json }}"
+    force_basic_auth: yes
+  tags: datasource
+  register: result
+  changed_when: result.status == 200
+  when: grafana_data_source is defined and grafana_data_source.name not in grafana_datasources
+
+- name: Configure test dashboard
+  uri:
+    HEADER_Content-Type: application/json
+    url: http://localhost:3000/api/dashboards/db
+    method: POST
+    user: admin
+    password: "{{ grafana_admin_password }}"
+    body: "{{ lookup('file',grafana_custom_dashboard) }}"
+    force_basic_auth: yes
+  tags: dashboard
+  register: result
+  changed_when: result.status == 200
+  failed_when: result.status != 200 and result.status != 412
+  when: grafana_custom_dashboard

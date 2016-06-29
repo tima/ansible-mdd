@@ -1,0 +1,6 @@
+- name: restart influxdb
+  service: 
+    name: influxdb
+    state: restarted
+    enabled: yes
+  when: influxdb_start_service

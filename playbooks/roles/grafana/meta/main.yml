@@ -1,0 +1,24 @@
+---
+# meta file for grafana
+dependencies: []
+#dependencies:
+#  - tima.grafana-repo
+
+galaxy_info:
+  author: tima
+  description: Setups the latest stable version of Grafana 
+  license: Apache 
+  min_ansible_version: 2.1
+  platforms:
+    - name: EL
+      versions:
+      - 6
+      - 7
+    #- name: Debian
+    #  versions:
+    #  - all
+    #- name: Ubuntu
+    #  versions:
+    #  - all
+  galaxy_tags:
+    - monitoring

@@ -1,0 +1,29 @@
+- when: influxdb_install_url is not defined or influxdb_install_url == None
+  block:
+
+  - name: Import InfluxData GPG signing key [Debian/Ubuntu]
+    apt_key:
+      url: https://repos.influxdata.com/influxdb.key
+      state: present
+
+  - name: Add InfluxData repository [Debian/Ubuntu]
+    apt_repository:
+      repo: "{{ influxdb_apt_sourcing }}"
+      state: present
+
+  - name: Install InfluxDB packages [Debian/Ubuntu]
+    apt:
+      name: influxdb
+      state: latest
+      update_cache: yes
+      cache_valid_time: 3600
+    notify:
+      - restart influxdb
+
+- name: Install InfluxDB package via URL [Debian/Ubuntu]
+  apt:
+    deb: "{{ influxdb_install_url }}"
+    state: present
+  when: influxdb_install_url is defined and influxdb_install_url != None
+  notify:
+    - restart influxdb

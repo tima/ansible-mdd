@@ -1,0 +1,25 @@
+- when: influxdb_install_url is not defined or influxdb_install_url == None
+  block:
+
+  - name: Add InfluxData repository file [RHEL/CentOS]
+    yum_repository:
+      name: influxdata
+      description: "InfluxData Repository - {{ ansible_distribution }} $releasever"
+      baseurl: "{{ influxdb_yum_baseurl }}"
+      gpgcheck:  yes
+      gpgkey: "https://repos.influxdata.com/influxdb.key"
+
+  - name: Install InfluxDB packages [RHEL/CentOS]
+    yum:
+      name: influxdb
+      state: latest
+    notify: 
+      - restart influxdb
+
+- name: Install InfluxDB from URL [RHEL/CentOS]
+  yum:
+    name: "{{ influxdb_install_url }}"
+    state: present
+  when: influxdb_install_url is defined and influxdb_install_url != None
+  notify: 
+    - restart influxdb

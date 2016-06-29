@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  author: Timothy Appnel 
+  description: Basic install and configure of InfluxDB, a time-series database
+  company: Ansible
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+    - name: EL
+      versions:
+        - 6
+        - 7
+    - name: Ubuntu
+      versions:
+        - trusty
+        - utopic
+        - vivid
+    - name: Debian
+      versions:
+        - jessie
+        - wheezy
+  galaxy_tags:
+    - clustering
+    - monitoring
+    - system
+    - database:nosql
+dependencies: []
+

@@ -1,0 +1,26 @@
+---
+grafana_install_url: https://grafanarel.s3.amazonaws.com/builds/grafana-3.0.4-1464167696.x86_64.rpm
+
+# grafana_packages:
+#  - "https://grafanarel.s3.amazonaws.com/builds/grafana-2.6.0-1.x86_64.rpm"
+#  - "python-httplib2"
+
+grafana_ip: "0.0.0.0"
+grafana_port: 3000
+grafana_admin_password: "password"
+grafana_secret_key: "18Z98oGhk95Oo72OmuG484eBP4g2774c"
+grafana_session_provider: "memory"
+grafana_sessions_provider_config: ""
+grafana_custom_dashboard: false
+
+# Plugins
+grafana_zabbix_plugin: false
+grafana_zabbix_version: "master"
+
+# Google Auth
+grafana_auth_google: false
+grafana_auth_google_allow_sign_up: "false"
+grafana_auth_google_client_id: "some_client_id"
+grafana_auth_google_client_secret: "some_client_secret"
+grafana_auth_google_allowed_domains: "petalmd.com"
+

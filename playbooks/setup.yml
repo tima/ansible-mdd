@@ -1,0 +1,20 @@
+---
+- name: Setup influxdb and grafana
+  hosts: control
+  become: yes
+  vars:
+    influxdb_install_python_client: yes
+  roles:
+    - tima.epel-repo
+    - influxdb
+    - grafana
+  post_tasks: 
+    - debug:
+        var: influxdb_url
+- name: Setup telegraf on servers
+  hosts: web
+  become: yes
+  vars:
+    telegraf_influxdb_url: "{{ influxdb_url }}"
+  roles:
+    - tima.telegraf-simple

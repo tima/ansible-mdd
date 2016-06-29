@@ -1,0 +1,23 @@
+---
+- name: Install Grafana
+  yum: 
+    name:  "{{ grafana_install_url }}"
+    state: present
+
+- name: Configure Grafana
+  template: 
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  notify: restart grafana
+
+- name: Install Grafana service
+  service: 
+    name: grafana-server 
+    state: started
+    enabled: yes
+
+- name: wait for grafana port
+  wait_for:
+    port: 3000
+
+- include: dash-conf.yml
