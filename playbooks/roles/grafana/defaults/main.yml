@@ -7,6 +7,8 @@ grafana_install_url: https://grafanarel.s3.amazonaws.com/builds/grafana-3.0.4-14
 
 grafana_ip: "0.0.0.0"
 grafana_port: 3000
+grafana_url: "http://{{ granafana_ip }}:{{ grafana_port }}"
+
 grafana_admin_password: "password"
 grafana_secret_key: "18Z98oGhk95Oo72OmuG484eBP4g2774c"
 grafana_session_provider: "memory"
