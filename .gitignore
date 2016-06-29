@@ -10,3 +10,4 @@ scratch/
 *ansible.cfg
 *extra_vars.yml
 *hosts
+tima.*
