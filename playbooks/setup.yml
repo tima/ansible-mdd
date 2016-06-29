@@ -11,6 +11,7 @@
   post_tasks: 
     - debug:
         var: influxdb_url
+        verbosity: 1
 - name: Setup telegraf on servers
   hosts: web
   become: yes
