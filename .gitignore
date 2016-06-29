@@ -6,8 +6,10 @@ venv/
 *rpm
 scratch/
 .bundle/
+*BAK
 
 *ansible.cfg
 *extra_vars.yml
 *hosts
 tima.*
+jsmartin.*
