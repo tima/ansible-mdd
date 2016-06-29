@@ -18,12 +18,12 @@
 
 - name: Setup test datasource
   uri:
-    HEADER_Content-Type: application/json
     url: "{{ grafana_url }}/api/datasources"
     method: POST
     user: admin
     password: "{{ grafana_admin_password }}"
     body: "{{ grafana_data_source | to_json }}"
+    body_format: json
     force_basic_auth: yes
   tags: datasource
   register: result
@@ -32,12 +32,12 @@
 
 - name: Configure test dashboard
   uri:
-    HEADER_Content-Type: application/json
     url: "{{ grafana_url }}/api/dashboards/db"
     method: POST
     user: admin
     password: "{{ grafana_admin_password }}"
     body: "{{ lookup('file',grafana_custom_dashboard) }}"
+    body_format: json
     force_basic_auth: yes
   tags: dashboard
   register: result
