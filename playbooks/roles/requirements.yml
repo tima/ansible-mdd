@@ -1,6 +1,2 @@
-#- src: jsmartin.grafana
-  # path: roles
-  #- src: jsmartin.influxdb
-  # path: roles
 - src: tima.telegraf-simple
 - src: tima.epel-repo 
